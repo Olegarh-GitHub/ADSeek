@@ -70,5 +70,14 @@ namespace ADSeek.Services
             
             return searchResults;
         }
+        
+        public virtual async Task AddEntryAsync(string dn, LdapAttributeSet attributeSets)
+        {
+            using var connection = await ConnectAsync();
+            
+            var addRequest = new LdapEntry(dn, attributeSets);
+
+            await connection.AddAsync(addRequest);
+        }
     }
 }
