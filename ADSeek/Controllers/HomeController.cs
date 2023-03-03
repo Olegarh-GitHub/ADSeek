@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ADSeek.Models;
 using ADSeek.Services;
+using Novell.Directory.Ldap;
 
 namespace ADSeek.Controllers
 {
@@ -26,6 +27,21 @@ namespace ADSeek.Controllers
             var users = await _adService.SearchAsync("OU=Users,DC=OLEG,DC=local", "(objectClass=user)");
 
             return Json(users.ToList());
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var dogger = new LdapAttributeSet();
+
+            string dn = "CN=DOGGER TESTO,OU=Users,DC=OLEG,DC=local";
+            
+            dogger.Add(new("dn", "CN=DOGGER TESTO,OU=Users,DC=OLEG,DC=local"));
+            dogger.Add(new("objectClass", "user"));
+            dogger.Add(new("cn", "DOGGER TESTO"));
+
+            await _adService.AddEntryAsync(dn, dogger);
+
+            return Ok();
         }
 
         public IActionResult Privacy()
