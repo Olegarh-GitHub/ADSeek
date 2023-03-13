@@ -15,17 +15,18 @@
     <table>
     @foreach (ActiveDirectoryAttributeModel attribute in Model.Attributes)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(_ => attribute.Attribute)
-            </td>
-        </tr>
-        <tr>
-           <td>
-               @Html.EditorFor(_ => attribute.Value)
-           </td>
-        </tr>
-        <tr style="border-bottom: 1px solid #000;"/>
+        <div>
+            <div style="margin-bottom: 10px">
+                <span style="font-style: oblique">
+                    @Html.LabelFor(_ => attribute.Attribute): @Html.DisplayFor(_ => attribute.Attribute)
+                </span>
+            </div>
+            <div style="margin-bottom: 10px">
+                @Html.EditorFor(_ => attribute.Value)
+            </div>
+        
+            <hr/>
+        </div>
     }
     </table>
 </div>
