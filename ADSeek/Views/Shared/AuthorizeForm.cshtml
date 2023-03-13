@@ -1,0 +1,83 @@
+﻿@model ActiveDirectoryAuthorizationModel
+
+@{
+    string exception = ViewBag.ExceptionByAuthorization;
+}
+
+@using (Html.BeginForm("Authorize", "ActiveDirectory", FormMethod.Post))
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Domain)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.EditorFor(model => model.Domain)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.DistinguishedName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.EditorFor(model => model.DistinguishedName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Password)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PasswordFor(model => model.Password)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="send_data" type="submit" value="Авторизация" oninput="hide()"/>
+                </td>
+            </tr>
+            @if (!string.IsNullOrEmpty(exception))
+            {
+                <tr>
+                    <td>
+                        <span id="span_exc" style="color: red" >
+                            @exception
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+<script>    
+
+    window.onload = (event) => {
+      console.log("page is fully loaded");
+      hide();
+    };
+
+    function hide() {
+            setTimeout(() => {
+                        console.log('feri');
+                          
+                        const box = document.getElementById('span_exc');
+                    
+                        // 👇️ removes element from DOM
+                        box.style.display = 'none';
+                    
+                        // 👇️ hides element (still takes up space on page)
+                        // box.style.visibility = 'hidden';
+                      }, 3000);
+    }
+          
+        
+    
+</script>

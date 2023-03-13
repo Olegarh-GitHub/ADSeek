@@ -6,6 +6,19 @@ namespace ADSeek.Application.Requests
 {
     public class LdapRequests
     {
+        public class AuthorizeRequest : LdapBaseRequests.IDistinguishedNameRequest
+        {
+            public string Password { get; set; }
+            
+            public AuthorizeRequest(string distinguishedName, string password)
+            {
+                DistinguishedName = distinguishedName;
+                Password = password;
+            }
+
+            public string DistinguishedName { get; set; }
+        }
+
         public class CreateRequest : LdapBaseRequests.IAttributeSetRequest, LdapBaseRequests.IDistinguishedNameRequest
         {
             public string DistinguishedName { get; set; }
@@ -51,7 +64,7 @@ namespace ADSeek.Application.Requests
         
         public class SearchRequest : LdapBaseRequests.IDistinguishedNameRequest
         {
-            public SearchRequest(string distinguishedName, string filter)
+            public SearchRequest(string distinguishedName, string filter = null)
             {
                 DistinguishedName = distinguishedName;
                 Filter = filter;

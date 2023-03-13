@@ -1,20 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "eGzuIq7S8XaGAQsXg3wZgKeE6PnRjkewtYAwT29dCrNdGj4O0cBN/02HnjbnKsbHwkQuU+3heYChvhyHpKA5Xg==",
+  "dgSpecHash": "G57Ki34X8qWfaafoE7WBzAWwP+quhjzwF2KPvu3IDK9H/FOKYDK7J06VYbF23QHTCV5zPlfcIy6FtJukr4OktA==",
   "success": true,
   "projectFilePath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\novell.directory.ldap.netstandard\\4.0.0-beta4\\novell.directory.ldap.netstandard.4.0.0-beta4.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\postsharp\\2023.0.3\\postsharp.2023.0.3.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\postsharp.redist\\2023.0.3\\postsharp.redist.2023.0.3.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\system.linq.async\\5.0.0\\system.linq.async.5.0.0.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512",
-    "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512"
+    "C:\\Users\\Oleg\\.nuget\\packages\\system.linq.async\\5.0.0\\system.linq.async.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

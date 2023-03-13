@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "jQuery/3.6.3": {
+        "type": "package"
+      },
       "Microsoft.Extensions.Logging.Abstractions/5.0.0": {
         "type": "package",
         "compile": {
@@ -32,10 +35,72 @@
         "runtime": {
           "lib/netcoreapp3.1/System.Linq.Async.dll": {}
         }
+      },
+      "ADSeek.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "ADSeek.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ADSeek.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ADSeek.Application.dll": {}
+        }
+      },
+      "ADSeek.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Novell.Directory.Ldap.NETStandard": "4.0.0-beta4"
+        },
+        "compile": {
+          "bin/placeholder/ADSeek.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ADSeek.Domain.dll": {}
+        }
+      },
+      "ADSeek.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "ADSeek.Application": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ADSeek.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ADSeek.Infrastructure.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "jQuery/3.6.3": {
+      "sha512": "v87yTa8y+t642SsUBRl+XSFg1+zkMfRMd3aO714aYL+AwVxglV7tcW7ZoL4BgwczXev8ge+0kNQBj2rWdyI+dQ==",
+      "type": "package",
+      "path": "jquery/3.6.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-3.6.3-vsdoc.js",
+        "Content/Scripts/jquery-3.6.3.js",
+        "Content/Scripts/jquery-3.6.3.min.js",
+        "Content/Scripts/jquery-3.6.3.min.map",
+        "Content/Scripts/jquery-3.6.3.slim.js",
+        "Content/Scripts/jquery-3.6.3.slim.min.js",
+        "Content/Scripts/jquery-3.6.3.slim.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-3.6.3.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.3.6.3.nupkg.sha512",
+        "jquery.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Logging.Abstractions/5.0.0": {
       "sha512": "NxP6ahFcBnnSfwNBi2KH2Oz8Xl5Sm2krjId/jRR3I7teFphwiUoUeZPwTNA21EX+5PtjqmyAvKaOeBXcJjcH/w==",
       "type": "package",
@@ -101,11 +166,29 @@
         "system.linq.async.5.0.0.nupkg.sha512",
         "system.linq.async.nuspec"
       ]
+    },
+    "ADSeek.Application/1.0.0": {
+      "type": "project",
+      "path": "../ADSeek.Application/ADSeek.Application.csproj",
+      "msbuildProject": "../ADSeek.Application/ADSeek.Application.csproj"
+    },
+    "ADSeek.Domain/1.0.0": {
+      "type": "project",
+      "path": "../ADSeek.Domain/ADSeek.Domain.csproj",
+      "msbuildProject": "../ADSeek.Domain/ADSeek.Domain.csproj"
+    },
+    "ADSeek.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../ADSeek.Infrastructure/ADSeek.Infrastructure.csproj",
+      "msbuildProject": "../ADSeek.Infrastructure/ADSeek.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Novell.Directory.Ldap.NETStandard >= 4.0.0-beta4"
+      "ADSeek.Application >= 1.0.0",
+      "ADSeek.Infrastructure >= 1.0.0",
+      "Novell.Directory.Ldap.NETStandard >= 4.0.0-beta4",
+      "jQuery >= 3.6.3"
     ]
   },
   "packageFolders": {
@@ -134,7 +217,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj": {
+              "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj"
+            },
+            "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj": {
+              "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -150,6 +240,10 @@
           "Novell.Directory.Ldap.NETStandard": {
             "target": "Package",
             "version": "[4.0.0-beta4, )"
+          },
+          "jQuery": {
+            "target": "Package",
+            "version": "[3.6.3, )"
           }
         },
         "imports": [

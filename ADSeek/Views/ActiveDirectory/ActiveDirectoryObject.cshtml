@@ -1,0 +1,31 @@
+﻿@model ActiveDirectoryObjectModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Объект @Model.Attributes.FirstOrDefault(x => x.Attribute == "cn")?.Value</title>
+</head>
+<body>
+<div>
+    <table>
+    @foreach (ActiveDirectoryAttributeModel attribute in Model.Attributes)
+    {
+        <tr>
+            <td>
+                @Html.LabelFor(_ => attribute.Attribute)
+            </td>
+            <td>
+                @Html.EditorFor(_ => attribute.Value)
+            </td>
+        </tr>
+        <hr/>
+    }
+    </table>
+</div>
+</body>
+</html>

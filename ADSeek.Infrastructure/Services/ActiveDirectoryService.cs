@@ -74,6 +74,20 @@ namespace ADSeek.Infrastructure.Services
             return connection;
         }
 
+        public async Task<ActiveDirectoryResult> AuthorizeAsync(LdapRequests.AuthorizeRequest request)
+        {
+            try
+            {
+                using ILdapConnection connection = await ConnectAsync();
+
+                return new ActiveDirectoryResult();
+            }
+            catch (Exception e)
+            {
+                return new ActiveDirectoryResult(exception: e);
+            }
+        }
+
         public async Task<ActiveDirectoryResult> InsertAsync(LdapRequests.CreateRequest request)
         {
             string dn = request.DistinguishedName;
@@ -156,6 +170,13 @@ namespace ADSeek.Infrastructure.Services
             List<LdapEntry> entries = await result.ToListAsync();
             
             return _converter.Map(entries.Select(entry => entry.GetAttributeSet())).ToList();
+        }
+
+        public async Task<ActiveDirectoryObject> GetMeAsync()
+        {
+            var me = await SearchAsync(new LdapRequests.SearchRequest(_settings.Username));
+
+            return me.FirstOrDefault();
         }
     }
 }

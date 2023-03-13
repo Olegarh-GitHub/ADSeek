@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ADSeek.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace ADSeek.Models
 {
     public class ActiveDirectorySettings
     {
-        public class ActiveDirectoryConnectionSettings
+        public class ActiveDirectoryConnectionSettings : IActiveDirectorySettings
         {
             public string Host { get; set; }
             public ushort Port { get; set; }

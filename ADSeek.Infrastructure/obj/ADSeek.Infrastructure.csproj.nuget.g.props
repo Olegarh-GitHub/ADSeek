@@ -12,7 +12,4 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\Oleg\.nuget\packages\" />
   </ItemGroup>
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)postsharp\2023.0.3\build\PostSharp.props" Condition="Exists('$(NuGetPackageRoot)postsharp\2023.0.3\build\PostSharp.props')" />
-  </ImportGroup>
 </Project>

@@ -33,7 +33,10 @@
     ".NETCoreApp,Version=v5.0": {
       "ADSeek/1.0.0": {
         "dependencies": {
+          "ADSeek.Application": "1.0.0",
+          "ADSeek.Infrastructure": "1.0.0",
           "Novell.Directory.Ldap.NETStandard": "4.0.0-beta4",
+          "jQuery": "3.6.3",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -325,6 +328,7 @@
           "ADSeek.dll": {}
         }
       },
+      "jQuery/3.6.3": {},
       "Microsoft.Extensions.Logging.Abstractions/5.0.0": {},
       "Novell.Directory.Ldap.NETStandard/4.0.0-beta4": {
         "dependencies": {
@@ -350,6 +354,39 @@
         },
         "compile": {
           "ref/netcoreapp3.1/System.Linq.Async.dll": {}
+        }
+      },
+      "ADSeek.Application/1.0.0": {
+        "dependencies": {
+          "ADSeek.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ADSeek.Application.dll": {}
+        },
+        "compile": {
+          "ADSeek.Application.dll": {}
+        }
+      },
+      "ADSeek.Domain/1.0.0": {
+        "dependencies": {
+          "Novell.Directory.Ldap.NETStandard": "4.0.0-beta4"
+        },
+        "runtime": {
+          "ADSeek.Domain.dll": {}
+        },
+        "compile": {
+          "ADSeek.Domain.dll": {}
+        }
+      },
+      "ADSeek.Infrastructure/1.0.0": {
+        "dependencies": {
+          "ADSeek.Application": "1.0.0"
+        },
+        "runtime": {
+          "ADSeek.Infrastructure.dll": {}
+        },
+        "compile": {
+          "ADSeek.Infrastructure.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -2058,6 +2095,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "jQuery/3.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v87yTa8y+t642SsUBRl+XSFg1+zkMfRMd3aO714aYL+AwVxglV7tcW7ZoL4BgwczXev8ge+0kNQBj2rWdyI+dQ==",
+      "path": "jquery/3.6.3",
+      "hashPath": "jquery.3.6.3.nupkg.sha512"
+    },
     "Microsoft.Extensions.Logging.Abstractions/5.0.0": {
       "type": "package",
       "serviceable": true,
@@ -2078,6 +2122,21 @@
       "sha512": "sha512-cPtIuuH8TIjVHSi2ewwReWGW1PfChPE0LxPIDlfwVcLuTM9GANFTXiMB7k3aC4sk3f0cQU25LNKzx+jZMxijqw==",
       "path": "system.linq.async/5.0.0",
       "hashPath": "system.linq.async.5.0.0.nupkg.sha512"
+    },
+    "ADSeek.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ADSeek.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ADSeek.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
       "type": "referenceassembly",

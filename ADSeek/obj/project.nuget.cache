@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "R8mkiIdPv7y00NLYyGpXyOchV3O775FvTIdU0yreAddwbKYDyV3kOp5zb/UPs/COtvUMFalRg3h2ux5mM2Z7Zw==",
+  "dgSpecHash": "wSV1dQHLb3OB/NPcK81FYpwKbkb7E4P+c+WP8694zhpd8Boe7h3wbrj2tRm7eTPfeQwDTlie48amy/QBLkGXbg==",
   "success": true,
   "projectFilePath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Oleg\\.nuget\\packages\\jquery\\3.6.3\\jquery.3.6.3.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\novell.directory.ldap.netstandard\\4.0.0-beta4\\novell.directory.ldap.netstandard.4.0.0-beta4.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\system.linq.async\\5.0.0\\system.linq.async.5.0.0.nupkg.sha512"

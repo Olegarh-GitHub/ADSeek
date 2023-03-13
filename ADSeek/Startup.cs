@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ADSeek.Application.Interfaces.Mappers;
+using ADSeek.Application.Interfaces.Services;
+using ADSeek.Domain.Interfaces;
+using ADSeek.Infrastructure.Mappers;
+using ADSeek.Infrastructure.Services;
 using ADSeek.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +14,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Novell.Directory.Ldap;
 
 namespace ADSeek
 {
@@ -27,7 +33,10 @@ namespace ADSeek
             services.AddControllersWithViews();
 
             var settings = new ActiveDirectorySettings(Configuration);
-            services.AddSingleton(_ => settings);
+            services.AddSingleton<IActiveDirectorySettings, ActiveDirectorySettings.ActiveDirectoryConnectionSettings>(_ => settings.ConnectionSettings);
+
+            services.AddTransient<IActiveDirectoryService, ActiveDirectoryService>();
+            services.AddTransient<IActiveDirectoryConverter<LdapAttributeSet>, ActiveDirectoryConverter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +64,7 @@ namespace ADSeek
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/");
             });
         }
     }

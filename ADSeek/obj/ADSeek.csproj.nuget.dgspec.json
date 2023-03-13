@@ -4,14 +4,72 @@
     "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj": {}
   },
   "projects": {
-    "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj": {
+    "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj",
-        "projectName": "ADSeek",
-        "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj",
+        "projectUniqueName": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj",
+        "projectName": "ADSeek.Application",
+        "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj",
         "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
-        "outputPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\obj\\",
+        "outputPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\ADSeek.Domain.csproj": {
+                "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\ADSeek.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\ADSeek.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\ADSeek.Domain.csproj",
+        "projectName": "ADSeek.Domain",
+        "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\ADSeek.Domain.csproj",
+        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
+        "outputPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +101,135 @@
             "Novell.Directory.Ldap.NETStandard": {
               "target": "Package",
               "version": "[4.0.0-beta4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj",
+        "projectName": "ADSeek.Infrastructure",
+        "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
+        "outputPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj": {
+                "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj",
+        "projectName": "ADSeek",
+        "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\ADSeek.csproj",
+        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
+        "outputPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj": {
+                "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Application\\ADSeek.Application.csproj"
+              },
+              "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj": {
+                "projectPath": "C:\\Coding\\CSharp\\ADSeek\\ADSeek\\ADSeek.Infrastructure\\ADSeek.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Novell.Directory.Ldap.NETStandard": {
+              "target": "Package",
+              "version": "[4.0.0-beta4, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.6.3, )"
             }
           },
           "imports": [

@@ -8,10 +8,12 @@ namespace ADSeek.Application.Interfaces.Services
 {
     public interface IActiveDirectoryService
     {
+        public Task<ActiveDirectoryResult> AuthorizeAsync(LdapRequests.AuthorizeRequest request);
         public Task<ActiveDirectoryResult> InsertAsync(LdapRequests.CreateRequest request);
         public Task<ActiveDirectoryResult> ModifyAsync(LdapRequests.ModifyRequest request);
         public ActiveDirectoryResult Move(LdapRequests.MoveRequest request);
         public ActiveDirectoryResult Remove(LdapRequests.RemoveRequest request);
-        public List<ActiveDirectoryObject> Search(LdapRequests.SearchRequest request);
+        public Task<List<ActiveDirectoryObject>> SearchAsync(LdapRequests.SearchRequest request);
+        public Task<ActiveDirectoryObject> GetMeAsync();
     }
 }

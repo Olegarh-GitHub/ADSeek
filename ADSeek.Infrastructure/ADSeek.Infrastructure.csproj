@@ -8,8 +8,4 @@
       <ProjectReference Include="..\ADSeek.Application\ADSeek.Application.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="PostSharp" Version="2023.0.3" />
-    </ItemGroup>
-
 </Project>
