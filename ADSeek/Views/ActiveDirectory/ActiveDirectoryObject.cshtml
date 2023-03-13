@@ -19,11 +19,16 @@
             <td>
                 @Html.LabelFor(_ => attribute.Attribute)
             </td>
-            <td>
-                @Html.EditorFor(_ => attribute.Value)
-            </td>
         </tr>
-        <hr/>
+        <tr>
+           <td>
+               @Html.EditorFor(_ => attribute.Value)
+           </td>
+        </tr>
+        <tr>
+            <hr/>
+        </tr>
+        
     }
     </table>
 </div>

@@ -47,3 +47,4 @@ C:\Coding\CSharp\ADSeek\ADSeek\ADSeek\bin\Debug\net5.0\ADSeek.Application.pdb
 C:\Coding\CSharp\ADSeek\ADSeek\ADSeek\bin\Debug\net5.0\ADSeek.Infrastructure.pdb
 C:\Coding\CSharp\ADSeek\ADSeek\ADSeek\bin\Debug\net5.0\ADSeek.Domain.pdb
 C:\Coding\CSharp\ADSeek\ADSeek\ADSeek\obj\Debug\net5.0\Razor\Views\Shared\AuthorizeForm.cshtml.g.cs
+C:\Coding\CSharp\ADSeek\ADSeek\ADSeek\obj\Debug\net5.0\Razor\Views\ActiveDirectory\ActiveDirectoryObject.cshtml.g.cs

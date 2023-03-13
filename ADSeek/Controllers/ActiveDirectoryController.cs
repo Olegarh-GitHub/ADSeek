@@ -13,7 +13,7 @@ namespace ADSeek.Controllers
 {
     public class ActiveDirectoryController : Controller
     {
-        private IActiveDirectoryService _service;
+        private static IActiveDirectoryService _service;
 
         private ActiveDirectorySettings.ActiveDirectoryConnectionSettings _settings(string domain, string dn, string password)
         {
