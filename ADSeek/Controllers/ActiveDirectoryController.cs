@@ -126,7 +126,7 @@ namespace ADSeek.Controllers
         public async Task<IActionResult> Add_Object(ActiveDirectoryAddObjectModel model)
         {
             var cn = model.CommonName;
-            var dn = $"{cn},CN=Users,DC=OLEG,DC=local";
+            var dn = $"CN={cn},CN=Users,DC=OLEG,DC=local";
 
             var attributes = new LdapAttributeSet()
             {
