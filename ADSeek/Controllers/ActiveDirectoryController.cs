@@ -18,6 +18,7 @@ namespace ADSeek.Controllers
     {
         public static IActiveDirectoryService _service;
         private readonly IServiceProvider _provider;
+        public static ActiveDirectoryObjectModel _me; 
 
         public ActiveDirectoryController(IServiceProvider provider)
         {
@@ -70,8 +71,10 @@ namespace ADSeek.Controllers
             ActiveDirectoryObject ad_object = await _service.GetMeAsync();
 
             ActiveDirectoryObjectModel ad_object_model = _convert(ad_object);
+            _me = ad_object_model;
 
             ViewBag.IsAuthorized = true;
+            ViewBag.Account = _me.DistinguishedName;
             
             return View("ActiveDirectoryObject", ad_object_model);
         }
@@ -105,6 +108,7 @@ namespace ADSeek.Controllers
                 ActiveDirectoryObjectModel model = _convert(ad_object);
                 
                 ViewBag.IsAuthorized = true;
+                ViewBag.Account = _me.DistinguishedName;
 
                 return View("ActiveDirectoryObject", model);
             }
@@ -118,6 +122,7 @@ namespace ADSeek.Controllers
         public async Task<IActionResult> Add_Object()
         {
             ViewBag.IsAuthorized = true;
+            ViewBag.Account = _me.DistinguishedName;
             
             return View("Add_Object");
         }
@@ -143,6 +148,9 @@ namespace ADSeek.Controllers
 
             var result = await _service.InsertAsync(request);
 
+            ViewBag.IsAuthorized = true;
+            ViewBag.Account = _me.DistinguishedName;
+            
             if (result.IsOk)
             {
                 return RedirectToAction("Domain_Object", new {dn = dn});
@@ -158,6 +166,9 @@ namespace ADSeek.Controllers
         [HttpGet]
         public async Task<IActionResult> Search()
         {
+            ViewBag.IsAuthorized = true;
+            ViewBag.Account = _me.DistinguishedName;
+            
             return View("ActiveDirectorySearch");
         }
 
@@ -174,7 +185,10 @@ namespace ADSeek.Controllers
                 var dns_raw = search_results.SelectMany(x => x.Attributes).ToList();
                 var dns = dns_raw.Where(x => x.Key == "distinguishedName").Select(x => x.Value.StringValue).ToList();
 
-                return View("/Views/ActiveDirectoryObjects/ActiveDirectorySearchResults.cshtml", new ActiveDirectoryObjectsListModel(){ DistinguishedNames = dns});
+                ViewBag.IsAuthorized = true;
+                ViewBag.Account = _me.DistinguishedName;
+                
+                return View("/Views/ActiveDirectoryObjects/ActiveDirectorySearchResults.cshtml", new ActiveDirectoryObjectsListModel() { DistinguishedNames = dns});
             }
             catch (Exception e)
             {

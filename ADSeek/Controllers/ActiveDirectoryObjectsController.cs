@@ -16,6 +16,7 @@ namespace ADSeek.Controllers
         public ActiveDirectoryObjectsController()
         {
             ViewBag.IsAuthorized = true;
+            ViewBag.Account = ActiveDirectoryController._me.DistinguishedName;
             _service = ActiveDirectoryController._service;
         }
 
@@ -48,6 +49,7 @@ namespace ADSeek.Controllers
                 };
                 
                 ViewBag.IsAuthorized = true;
+                ViewBag.Account = ActiveDirectoryController._me.DistinguishedName;
                 
                 return View("ActiveDirectoryObjectsList", o);
             }

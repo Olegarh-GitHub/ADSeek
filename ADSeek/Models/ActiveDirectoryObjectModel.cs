@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ADSeek.Models
 {
@@ -7,5 +8,7 @@ namespace ADSeek.Models
     {
         [Display(Name = "Атрибуты")]
         public List<ActiveDirectoryAttributeModel> Attributes { get; set; }
+
+        public string DistinguishedName => Attributes.FirstOrDefault(x => x.Attribute == "distinguishedName")?.Value;
     }
 }

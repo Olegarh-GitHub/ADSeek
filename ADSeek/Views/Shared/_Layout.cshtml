@@ -1,5 +1,6 @@
 ﻿@{
     bool isAuthorized = ViewBag.IsAuthorized ?? false;
+    string account = ViewBag.Account;
 }
 
 <!DOCTYPE html>
@@ -34,6 +35,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ActiveDirectory" asp-action="Search">Поиск</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="right: 40%" asp-area="" asp-controller="ActiveDirectory" asp-action="Domain_Object" asp-route-dn="@account">@account</a>
                         </li>
                     }
                 </ul>
