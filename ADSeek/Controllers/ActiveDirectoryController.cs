@@ -88,8 +88,8 @@ namespace ADSeek.Controllers
             };
         }
         
-        [HttpPost]
-        public async Task<IActionResult> Index(string dn)
+        [HttpGet]
+        public async Task<IActionResult> Domain_Object(string dn)
         {
             List<ActiveDirectoryObject> ad_objects = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
 

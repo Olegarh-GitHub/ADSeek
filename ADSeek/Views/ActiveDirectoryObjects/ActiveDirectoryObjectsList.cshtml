@@ -13,12 +13,12 @@
 <body>
 <div>
     <h2>Объекты на домене:</h2>
-    @foreach (var objectList in Model.ObjectList)
+    @foreach (var objectList in Model.DistinguishedNames)
     {
         <div>
             <div>
                 <span style="font-weight: bold">
-                    @Html.ActionLink(objectList.DistinguishedName, "Index", "ActiveDirectory", routeValues: new {dn = objectList.DistinguishedName})
+                    @Html.ActionLink(objectList, "Domain_Object", "ActiveDirectory", routeValues: new {dn = objectList})
                 </span>
             </div>
 

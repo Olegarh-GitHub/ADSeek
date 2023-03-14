@@ -38,17 +38,14 @@ namespace ADSeek.Controllers
                 var objects = await _service.SearchAsync(new LdapRequests.SearchRequest("CN=Users,DC=OLEG,DC=local"));
                 var models = objects.Select(_convert).ToList();
 
-                var objectList = models.SelectMany(x => x.Attributes.SelectMany(y => x.Attributes).ToList())
-                    .Where(x => x.Attribute == "distinguishedName").Distinct().ToList();
+                var dns_raw = models.SelectMany(x => x.Attributes).ToList();
+                var dns = dns_raw.Where(x => x.Attribute == "distinguishedName").Select(x => x.Attribute).ToList();
 
                 var o = new ActiveDirectoryObjectsListModel()
                 {
-                    ObjectList = objectList.Select(x => new ActiveDirectoryObjectsListModel.ActiveDirectoryObjectList()
-                    {
-                        DistinguishedName = x.Value
-                    }).ToList()
+                    DistinguishedNames = dns
                 };
-
+                
                 return View("ActiveDirectoryObjectsList", o);
             }
             catch (Exception e)

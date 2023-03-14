@@ -4,11 +4,6 @@ namespace ADSeek.Models
 {
     public class ActiveDirectoryObjectsListModel
     {
-        public List<ActiveDirectoryObjectList> ObjectList { get; set; }
-
-        public class ActiveDirectoryObjectList
-        {
-            public string DistinguishedName { get; set; }
-        }
+        public List<string> DistinguishedNames { get; set; }
     }
 }
