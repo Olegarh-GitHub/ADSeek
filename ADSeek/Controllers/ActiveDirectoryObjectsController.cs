@@ -35,7 +35,7 @@ namespace ADSeek.Controllers
         {
             try
             {
-                var objects = await _service.SearchAsync(new LdapRequests.SearchRequest("DC=local"));
+                var objects = await _service.SearchAsync(new LdapRequests.SearchRequest("DC=OLEG,DC=local"));
                 var models = objects.Select(_convert).ToList();
 
                 var objectList = models.SelectMany(x => x.Attributes.SelectMany(y => x.Attributes).ToList())
