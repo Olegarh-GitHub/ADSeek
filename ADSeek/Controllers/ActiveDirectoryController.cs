@@ -154,5 +154,33 @@ namespace ADSeek.Controllers
                 return View("Add_Object");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Search()
+        {
+            return View("ActiveDirectorySearch");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(ActiveDirectorySearchModel model)
+        {
+            try
+            {
+                string dn = model.DistinguishedName;
+                string filter = model.Filter;
+
+                var search_results = await _service.SearchAsync(new LdapRequests.SearchRequest(dn, filter));
+
+                var dns_raw = search_results.SelectMany(x => x.Attributes).ToList();
+                var dns = dns_raw.Where(x => x.Key == "distinguishedName").Select(x => x.Value.StringValue).ToList();
+
+                return View("/Views/ActiveDirectoryObjects/ActiveDirectorySearchResults.cshtml", new ActiveDirectoryObjectsListModel(){ DistinguishedNames = dns});
+            }
+            catch (Exception e)
+            {
+                return View("/Views/Home/Error_View.cshtml");
+            }
+
+        }
     }
 }
