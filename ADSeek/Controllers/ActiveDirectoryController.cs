@@ -112,6 +112,47 @@ namespace ADSeek.Controllers
             {
                 return View("/Views/Home/Error_View.cshtml", e);
             }
-        } 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add_Object()
+        {
+            ViewBag.IsAuthorized = true;
+            
+            return View("Add_Object");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add_Object(ActiveDirectoryAddObjectModel model)
+        {
+            var cn = model.CommonName;
+            var dn = $"{cn},CN=Users,DC=OLEG,DC=local";
+
+            var attributes = new LdapAttributeSet()
+            {
+                new("objectClass", "user"),
+                new("displayName", model.DisplayName),
+                new("givenName", model.GivenName),
+                new("sn", model.Surname),
+                new("cn", model.CommonName),
+                new("sAMAccountName", model.SAMAccountName),
+                new("mail", model.Mail)
+            };
+
+            var request = new LdapRequests.CreateRequest(dn, attributes);
+
+            var result = await _service.InsertAsync(request);
+
+            if (result.IsOk)
+            {
+                return RedirectToAction("Domain_Object", new {dn = dn});
+            }
+            else
+            {
+                ViewBag.ExceptionByCreation = result.ErrorMessage;
+                
+                return View("Add_Object");
+            }
+        }
     }
 }

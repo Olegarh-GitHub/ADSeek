@@ -1,0 +1,128 @@
+﻿@model ActiveDirectoryAddObjectModel
+
+@{
+    Layout = "_Layout";
+
+    var exception = ViewBag.ExceptionByCreation;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Добавить объект</title>
+</head>
+<body>
+<div>
+    <h1>Добавить учетную запись</h1>
+
+    @using (Html.BeginForm("Add_Object", "ActiveDirectory", FormMethod.Post))
+    {
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Surname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Surname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.GivenName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.GivenName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.CommonName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.CommonName)
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.DisplayName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.DisplayName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.SAMAccountName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.SAMAccountName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Mail)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Mail)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="send_data" type="submit" value="Авторизация" oninput="hide()"/>
+                    </td>
+                </tr>
+                @if (!string.IsNullOrEmpty(exception))
+                {
+                    <tr>
+                        <td>
+                            <span id="span_exc" style="color: red" >
+                                @exception
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+
+</div>
+</body>
+<script>
+  window.onload = (event) => {
+      console.log("page is fully loaded");
+      hide();
+    };
+
+    function hide() {
+            setTimeout(() => {
+                        console.log('feri');
+                          
+                        const box = document.getElementById('span_exc');
+                    
+                        // 👇️ removes element from DOM
+                        box.style.display = 'none';
+                    
+                        // 👇️ hides element (still takes up space on page)
+                        // box.style.visibility = 'hidden';
+                      }, 3000);
+    }
+          </script>
+        
+    
+
+</html>
