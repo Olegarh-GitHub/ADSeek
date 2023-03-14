@@ -39,7 +39,7 @@ namespace ADSeek.Controllers
                 var models = objects.Select(_convert).ToList();
 
                 var dns_raw = models.SelectMany(x => x.Attributes).ToList();
-                var dns = dns_raw.Where(x => x.Attribute == "distinguishedName").Select(x => x.Attribute).ToList();
+                var dns = dns_raw.Where(x => x.Attribute == "distinguishedName").Select(x => x.Value).ToList();
 
                 var o = new ActiveDirectoryObjectsListModel()
                 {
