@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ADSeek.Application.Interfaces.Services;
 using ADSeek.Application.Requests;
@@ -7,13 +9,21 @@ using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
 using ADSeek.Models;
 using Microsoft.AspNetCore.Mvc;
+using Novell.Directory.Ldap;
 using ActiveDirectoryObject = ADSeek.Domain.Models.ActiveDirectoryObject;
 
 namespace ADSeek.Controllers
 {
     public class ActiveDirectoryController : Controller
     {
-        private static IActiveDirectoryService _service;
+        public static IActiveDirectoryService _service;
+        private readonly IServiceProvider _provider;
+
+        public ActiveDirectoryController(IServiceProvider provider)
+        {
+            _provider = provider;
+        }
+
 
         private ActiveDirectorySettings.ActiveDirectoryConnectionSettings _settings(string domain, string dn, string password)
         {
@@ -49,6 +59,8 @@ namespace ADSeek.Controllers
                 return View("/Views/Home/Index.cshtml");
             }
 
+            ViewBag.IsAuthorized = true;
+            
             return RedirectToAction("Index");
         }
 
@@ -57,16 +69,49 @@ namespace ADSeek.Controllers
         {
             ActiveDirectoryObject ad_object = await _service.GetMeAsync();
 
-            ActiveDirectoryObjectModel ad_object_model = new ActiveDirectoryObjectModel()
+            ActiveDirectoryObjectModel ad_object_model = _convert(ad_object);
+
+            ViewBag.IsAuthorized = true;
+            
+            return View("ActiveDirectoryObject", ad_object_model);
+        }
+
+        private ActiveDirectoryObjectModel _convert(ActiveDirectoryObject adObj)
+        {
+            return new ActiveDirectoryObjectModel()
             {
-                Attributes = ad_object.Attributes.Select(x => new ActiveDirectoryAttributeModel()
+                Attributes = adObj.Attributes.Select(x => new ActiveDirectoryAttributeModel()
                 {
                     Attribute = x.Key,
                     Value = string.Join(",", x.Value.StringValueArray)
                 }).ToList()
             };
-
-            return View("ActiveDirectoryObject", ad_object_model);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Index(string dn)
+        {
+            List<ActiveDirectoryObject> ad_objects = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+
+            try
+            {
+                ActiveDirectoryObject ad_object = ad_objects.FirstOrDefault();
+
+                if (ad_object is null)
+                {
+                    throw new Exception($"Объект с distinguishedName={dn} не найден");
+                }
+
+                ActiveDirectoryObjectModel model = _convert(ad_object);
+                
+                ViewBag.IsAuthorized = true;
+
+                return View("ActiveDirectoryObject", model);
+            }
+            catch (Exception e)
+            {
+                return View("/Views/Home/Error_View.cshtml", e);
+            }
+        } 
     }
 }

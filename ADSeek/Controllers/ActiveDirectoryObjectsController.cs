@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ADSeek.Application.Interfaces.Services;
+using ADSeek.Application.Requests;
+using ADSeek.Domain.Models;
+using ADSeek.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ADSeek.Controllers
@@ -9,15 +13,48 @@ namespace ADSeek.Controllers
     {
         private readonly IActiveDirectoryService _service;
 
-        public ActiveDirectoryObjectsController(IActiveDirectoryService service)
+        public ActiveDirectoryObjectsController()
         {
-            _service = service;
+            _service = ActiveDirectoryController._service;
         }
 
+        private ActiveDirectoryObjectModel _convert(ActiveDirectoryObject adObj)
+        {
+            return new ActiveDirectoryObjectModel()
+            {
+                Attributes = adObj.Attributes.Select(x => new ActiveDirectoryAttributeModel()
+                {
+                    Attribute = x.Key,
+                    Value = string.Join(",", x.Value.StringValueArray)
+                }).ToList()
+            };
+        }
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var objects = await _service.SearchAsync(new LdapRequests.SearchRequest("DC=local"));
+                var models = objects.Select(_convert).ToList();
+
+                var objectList = models.SelectMany(x => x.Attributes.SelectMany(y => x.Attributes).ToList())
+                    .Where(x => x.Attribute == "distinguishedName").ToList();
+
+                var o = new ActiveDirectoryObjectsListModel()
+                {
+                    ObjectList = objectList.Select(x => new ActiveDirectoryObjectsListModel.ActiveDirectoryObjectList()
+                    {
+                        DistinguishedName = x.Value
+                    }).ToList()
+                };
+
+                return View("ActiveDirectoryObjectsList", o);
+            }
+            catch (Exception e)
+            {
+                return View("/Views/Home/Error_View.cshtml", e);
+            }
         }
     }
 }

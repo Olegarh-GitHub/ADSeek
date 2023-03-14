@@ -15,8 +15,4 @@
       <ProjectReference Include="..\ADSeek.Infrastructure\ADSeek.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\ActiveDirectoryObjects" />
-    </ItemGroup>
-
 </Project>
