@@ -1,0 +1,21 @@
+﻿@model Exception
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ошибка</title>
+</head>
+<body>
+<div>
+    <h1><span style="color: red">Произошла ошибка</span></h1>
+    <h2><span style="font-weight: bold">
+        @Model.Message
+    </span></h2>
+</div>
+</body>
+</html>

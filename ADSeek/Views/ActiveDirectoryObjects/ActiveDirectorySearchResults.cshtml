@@ -1,0 +1,37 @@
+﻿@model ActiveDirectoryObjectsListModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Поиск внутри домена</title>
+</head>
+<body>
+<div>
+    <h2>Результаты поиска:</h2>
+    @if (!Model.DistinguishedNames.Any())
+    {
+        <h3>ничего не найдено</h3>
+    }
+    else
+    {
+        foreach (var objectList in Model.DistinguishedNames)
+        {
+            <div>
+                <div>
+                    <span style="font-weight: bold">
+                        @Html.ActionLink(objectList, "Domain_Object", "ActiveDirectory", routeValues: new {dn = objectList})
+                    </span>
+                </div>
+
+                <hr/>
+            </div>
+        }
+    }
+</div>
+</body>
+</html>

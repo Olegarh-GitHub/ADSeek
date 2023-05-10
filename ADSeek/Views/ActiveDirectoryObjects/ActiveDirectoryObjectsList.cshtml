@@ -1,0 +1,30 @@
+﻿@model ActiveDirectoryObjectsListModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Все объекты домена</title>
+</head>
+<body>
+<div>
+    <h2>Объекты на домене:</h2>
+    @foreach (var objectList in Model.DistinguishedNames)
+    {
+        <div>
+            <div>
+                <span style="font-weight: bold">
+                    @Html.ActionLink(objectList, "Domain_Object", "ActiveDirectory", routeValues: new {dn = objectList})
+                </span>
+            </div>
+
+            <hr/>
+        </div>
+    }
+</div>
+</body>
+</html>
