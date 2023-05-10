@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.Surname)
+                        @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "form-control"}})
                     </td>
                 </tr>
                 <tr>
@@ -37,7 +37,17 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.GivenName)
+                        @Html.EditorFor(model => model.GivenName, new {htmlAttributes = new {@class = "form-control"}})
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
                     </td>
                 </tr>
                 <tr>
@@ -47,10 +57,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.CommonName)
+                        @Html.EditorFor(model => model.CommonName, new {htmlAttributes = new {@class = "form-control"}})
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>
                         @Html.LabelFor(model => model.DisplayName)
@@ -58,7 +68,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.DisplayName)
+                        @Html.EditorFor(model => model.DisplayName, new {htmlAttributes = new {@class = "form-control"}})
                     </td>
                 </tr>
                 <tr>
@@ -68,7 +78,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.SAMAccountName)
+                        @Html.EditorFor(model => model.SAMAccountName, new {htmlAttributes = new {@class = "form-control"}})
                     </td>
                 </tr>
                 <tr>
@@ -78,19 +88,19 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.EditorFor(model => model.Mail)
+                        @Html.EditorFor(model => model.Mail, new {htmlAttributes = new {@class = "form-control"}})
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input id="send_data" type="submit" value="Авторизация" oninput="hide()"/>
+                        <input id="send_data" type="submit" value="Создать учетную запись" oninput="hide()" class="btn btn-dark"/>
                     </td>
                 </tr>
                 @if (!string.IsNullOrEmpty(exception))
                 {
                     <tr>
                         <td>
-                            <span id="span_exc" style="color: red" >
+                            <span id="span_exc" style="color: red">
                                 @exception
                             </span>
                         </td>
@@ -122,7 +132,6 @@
                       }, 3000);
     }
           </script>
-        
-    
+
 
 </html>

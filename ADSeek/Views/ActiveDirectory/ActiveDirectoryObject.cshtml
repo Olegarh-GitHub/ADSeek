@@ -22,7 +22,7 @@
                 </span>
             </div>
             <div style="margin-bottom: 10px">
-                @Html.EditorFor(_ => attribute.Value, new {style = "width:150px"})
+                @Html.EditorFor(_ => attribute.Value, new {htmlAttributes = new {style = "width:150px", @class = "form-control"}})
             </div>
         
             <hr/>
