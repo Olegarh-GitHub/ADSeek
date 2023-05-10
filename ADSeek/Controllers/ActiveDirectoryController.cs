@@ -159,9 +159,9 @@ namespace ADSeek.Controllers
 
             var attributesToModify = new LdapAttributeSet()
             {
-                new("userAccountControl", "66048"),
                 new("pwdLastSet", "0"),
-                new("unicodePwd", Encoding.Unicode.GetBytes($"\"{password}\""))
+                new("unicodePwd", Encoding.Unicode.GetBytes($"\"{password}\"")),
+                new("userAccountControl", "512")
             };
             
             var modifyRequest = new LdapRequests.ModifyRequest(dn, attributesToModify);
