@@ -9,7 +9,7 @@ using ADSeek.Domain.Models;
 using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
 using ADSeek.Models;
-using ADSeek.ModelViews;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Novell.Directory.Ldap;
 using ActiveDirectoryObject = ADSeek.Domain.Models.ActiveDirectoryObject;
@@ -20,11 +20,13 @@ namespace ADSeek.Controllers
     {
         public static IActiveDirectoryService _service;
         private readonly IServiceProvider _provider;
-        public static ActiveDirectoryObjectModel _me; 
+        public static ActiveDirectoryObjectModel _me;
+        private readonly IMapper _mapper;
 
-        public ActiveDirectoryController(IServiceProvider provider)
+        public ActiveDirectoryController(IServiceProvider provider, IMapper mapper)
         {
             _provider = provider;
+            _mapper = mapper;
         }
 
 
@@ -51,7 +53,7 @@ namespace ADSeek.Controllers
 
             LdapRequests.AuthorizeRequest request = new LdapRequests.AuthorizeRequest(dn, password);
 
-            _service = new ActiveDirectoryService(_settings(domain, dn, password), new ActiveDirectoryConverter());
+            _service = new ActiveDirectoryService(_settings(domain, dn, password), new ActiveDirectoryConverter(), _mapper);
 
             ActiveDirectoryResult result = await _service.AuthorizeAsync(request);
 
@@ -59,7 +61,7 @@ namespace ADSeek.Controllers
             {
                 ViewBag.ExceptionByAuthorization = result.ErrorMessage;
 
-                return View("/Views/Shared/ModalView.cshtml", new ModalModelView("Произошла ошибка", result.ErrorMessage, "#FF0000"));
+                return NotFound();
             }
 
             ViewBag.IsAuthorized = true;
@@ -72,54 +74,40 @@ namespace ADSeek.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ActiveDirectoryObject ad_object = await _service.GetMeAsync();
-
-            ActiveDirectoryObjectModel ad_object_model = _convert(ad_object);
-            _me = ad_object_model;
-
+            ActiveDirectoryUser ad_object = await _service.GetMeAsync();
+            
             ViewBag.IsAuthorized = true;
             ViewBag.Account = _me.DistinguishedName;
             
-            return View("ActiveDirectoryObject", ad_object_model);
+            return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", ad_object);
         }
 
-        private ActiveDirectoryObjectModel _convert(ActiveDirectoryObject adObj)
-        {
-            return new ActiveDirectoryObjectModel()
-            {
-                Attributes = adObj.Attributes.Select(x => new ActiveDirectoryAttributeModel()
-                {
-                    Attribute = x.Key,
-                    Value = string.Join(",", x.Value.StringValueArray)
-                }).ToList()
-            };
-        }
-        
         [HttpGet]
         public async Task<IActionResult> Domain_Object(string dn)
         {
-            List<ActiveDirectoryObject> ad_objects = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
-
-            try
-            {
-                ActiveDirectoryObject ad_object = ad_objects.FirstOrDefault();
-
-                if (ad_object is null)
-                {
-                    throw new Exception($"Объект с distinguishedName={dn} не найден");
-                }
-
-                ActiveDirectoryObjectModel model = _convert(ad_object);
-                
-                ViewBag.IsAuthorized = true;
-                ViewBag.Account = _me.DistinguishedName;
-
-                return View("ActiveDirectoryObject", model);
-            }
-            catch (Exception e)
-            {
-                return View("/Views/Home/Error_View.cshtml", e);
-            }
+            return Ok();
+            // List<ActiveDirectoryObject> ad_objects = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+            //
+            // try
+            // {
+            //     ActiveDirectoryObject ad_object = ad_objects.FirstOrDefault();
+            //
+            //     if (ad_object is null)
+            //     {
+            //         throw new Exception($"Объект с distinguishedName={dn} не найден");
+            //     }
+            //
+            //     ActiveDirectoryObjectModel model = _convert(ad_object);
+            //     
+            //     ViewBag.IsAuthorized = true;
+            //     ViewBag.Account = _me.DistinguishedName;
+            //
+            //     return View("ActiveDirectoryObject", model);
+            // }
+            // catch (Exception e)
+            // {
+            //     return View("/Views/Home/Error_View.cshtml", e);
+            // }
         }
 
         [HttpGet]

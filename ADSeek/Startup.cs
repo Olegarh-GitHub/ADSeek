@@ -7,6 +7,7 @@ using ADSeek.Application.Interfaces.Services;
 using ADSeek.Domain.Interfaces;
 using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
+using ADSeek.MappingProfiles;
 using ADSeek.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,8 @@ namespace ADSeek
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
+            services.AddAutoMapper(typeof(ActiveDirectoryMappingProfile));
             services.AddTransient<IActiveDirectoryConverter<LdapAttributeSet>, ActiveDirectoryConverter>();
         }
 

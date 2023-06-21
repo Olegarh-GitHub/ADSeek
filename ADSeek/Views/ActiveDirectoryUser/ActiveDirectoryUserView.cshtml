@@ -1,15 +1,16 @@
-﻿@model ActiveDirectoryObjectModel
+﻿@using ADSeek.Domain.Enums
+@model ADSeek.Domain.Models.ActiveDirectoryUser
 
 @{
-    ViewBag.Title = $"Пользователь {(Model.Attributes.FirstOrDefault(item => item.Key == "sAMAccountName").Value.StringValue)}";
+    ViewBag.Title = $"Пользователь {Model.DisplayName}";
 
-    var imageBytes = Model.Attributes.FirstOrDefault(item => item.Key == "photo").Value.ByteValue;
+    var imageBytes = Model.Photo;
     var imageBase64 = $"data:image/gif;base64,{Convert.ToBase64String(imageBytes)}";
     
     Layout = "_Layout";
 }
 
-<h2>Пользователь @Model.Attributes.FirstOrDefault(x => x.Key == "cn").Value</h2>
+<h2>Пользователь @Model.SamAccountName</h2>
 
 <hr/>
 
@@ -17,7 +18,7 @@
     <table id="main-attributes-container">
         <tr>
             <td>
-                Уникальное имя записи
+                @Html.LabelFor(model => model.DistinguishedName)
             </td>
             <td>
                 @Model.DistinguishedName
@@ -25,18 +26,27 @@
         </tr>
         <tr>
             <td>
-                Отображаемое имя
+                @Html.LabelFor(model => model.Surname)
             </td>
             <td>
-                @Model.Attributes.FirstOrDefault(item => item.Key == "displayName").Value
+                @Html.EditorFor(model => model.Surname)
             </td>
         </tr>
         <tr>
             <td>
-                Имя
+                @Html.LabelFor(model => model.GivenName)
             </td>
             <td>
-                @Model.Attributes.FirstOrDefault(item => item)
+                @Html.EditorFor(model => model.GivenName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.UserAccountControl)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.UserAccountControl, 
+                    Html.GetEnumSelectList<UserAccountControl>(),new { @class = "form-control" })
             </td>
         </tr>
     </table>

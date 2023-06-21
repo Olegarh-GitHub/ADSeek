@@ -12,6 +12,9 @@ namespace ADSeek.Domain.Models
         [DisplayName("Уникальное имя записи объекта")]
         public string DistinguishedName { get; set; }
         
+        [DisplayName("Отображаемое имя")]
+        public string DisplayName { get; set; }
+        
         [DisplayName("Имя")]
         public string GivenName { get; set; }
         

@@ -2,6 +2,6 @@
 {
     public class RemoveUserInput
     {
-        
+        public string DistinguishedName { get; set; }
     }
 }

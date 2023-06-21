@@ -7,6 +7,7 @@ using ADSeek.Application.Interfaces.Services;
 using ADSeek.Application.Requests;
 using ADSeek.Domain.Interfaces;
 using ADSeek.Domain.Models;
+using AutoMapper;
 using Novell.Directory.Ldap;
 
 namespace ADSeek.Infrastructure.Services
@@ -15,15 +16,16 @@ namespace ADSeek.Infrastructure.Services
     {
         private readonly IActiveDirectorySettings _settings;
         private readonly IActiveDirectoryConverter<LdapAttributeSet> _converter;
-
+        private readonly IMapper _mapper;
+        
         public ActiveDirectoryService
         (
             IActiveDirectorySettings settings,
-            IActiveDirectoryConverter<LdapAttributeSet> converter
-        )
+            IActiveDirectoryConverter<LdapAttributeSet> converter, IMapper mapper)
         {
             _settings = settings;
             _converter = converter;
+            _mapper = mapper;
         }
 
         private async Task<bool> _isExists(string dn)
@@ -73,6 +75,8 @@ namespace ADSeek.Infrastructure.Services
 
             return connection;
         }
+
+        public IActiveDirectorySettings Settings => _settings;
 
         public async Task<ActiveDirectoryResult> AuthorizeAsync(LdapRequests.AuthorizeRequest request)
         {
@@ -203,11 +207,13 @@ namespace ADSeek.Infrastructure.Services
             return _converter.Map(entries.Select(entry => entry.GetAttributeSet())).ToList();
         }
 
-        public async Task<ActiveDirectoryObject> GetMeAsync()
+        public async Task<ActiveDirectoryUser> GetMeAsync()
         {
             var me = await SearchAsync(new LdapRequests.SearchRequest(_settings.Username));
 
-            return me.FirstOrDefault();
+            var user = _mapper.Map<ActiveDirectoryUser>(me.FirstOrDefault());
+            
+            return user;
         }
     }
 }
