@@ -78,6 +78,16 @@ namespace ADSeek.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> UserView(string dn)
+        {
+            var neededObject = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+
+            var user = _mapper.Map<ActiveDirectoryUser>(neededObject);
+
+            return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", user);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Domain_Object(string dn)
         {
             return Ok();
@@ -183,12 +193,8 @@ namespace ADSeek.Controllers
 
                 var search_results = await _service.SearchAsync(new LdapRequests.SearchRequest(dn, filter));
 
-                var dns_raw = search_results.SelectMany(x => x.Attributes).ToList();
-                var dns = dns_raw.Where(x => x.Key == "distinguishedName").Select(x => x.Value.StringValue).ToList();
+                var dns = search_results.Select(item => (item.DistinguishedName, item.ObjectClass)).ToList();
 
-                ViewBag.IsAuthorized = true;
-                ViewBag.Account = _me.DistinguishedName;
-                
                 return View("/Views/ActiveDirectoryObjects/ActiveDirectorySearchResults.cshtml", new ActiveDirectoryObjectsListModel() { DistinguishedNames = dns});
             }
             catch (Exception e)

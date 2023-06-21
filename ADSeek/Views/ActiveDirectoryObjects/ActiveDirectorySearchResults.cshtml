@@ -1,4 +1,5 @@
-﻿@model ActiveDirectoryObjectsListModel
+﻿@using ADSeek.Domain.Enums
+@model ActiveDirectoryObjectsListModel
 
 @{
     Layout = "_Layout";
@@ -19,14 +20,17 @@
     }
     else
     {
-        foreach (var objectList in Model.DistinguishedNames)
+        foreach (var (dn, objectClass) in Model.DistinguishedNames)
         {
             <div>
-                <div>
-                    <span style="font-weight: bold">
-                        @Html.ActionLink(objectList, "Domain_Object", "ActiveDirectory", routeValues: new {dn = objectList})
-                    </span>
-                </div>
+                @if (objectClass.HasFlag(ObjectClass.User))
+                {
+                    <div>
+                        <span style="font-weight: bold">
+                            @Html.ActionLink(dn, "UserView", "ActiveDirectory", routeValues: new {dn = dn})
+                        </span>
+                    </div>
+                }
 
                 <hr/>
             </div>
