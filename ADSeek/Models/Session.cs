@@ -7,6 +7,7 @@ namespace ADSeek.Models
     {
         public static ActiveDirectoryObject CURRENT_USER { get; set; }
 
+        public static bool IS_AUTHORIZED => CURRENT_USER is not null;
         public static bool IS_DOMAIN_ADMINISTRATOR = CURRENT_USER?.Attributes
             .Where(attribute => attribute.Key == "memberOf")
             .SelectMany

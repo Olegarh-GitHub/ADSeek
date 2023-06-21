@@ -31,11 +31,7 @@ namespace ADSeek
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            var settings = new ActiveDirectorySettings(Configuration);
-            services.AddSingleton<IActiveDirectorySettings, ActiveDirectorySettings.ActiveDirectoryConnectionSettings>(_ => settings.ConnectionSettings);
-
-            services.AddTransient<IActiveDirectoryService, ActiveDirectoryService>();
+            
             services.AddTransient<IActiveDirectoryConverter<LdapAttributeSet>, ActiveDirectoryConverter>();
         }
 

@@ -1,0 +1,53 @@
+﻿@model ActiveDirectoryObjectModel
+
+@{
+    ViewBag.Title = $"Пользователь {(Model.Attributes.FirstOrDefault(item => item.Key == "sAMAccountName").Value.StringValue)}";
+
+    var imageBytes = Model.Attributes.FirstOrDefault(item => item.Key == "photo").Value.ByteValue;
+    var imageBase64 = $"data:image/gif;base64,{Convert.ToBase64String(imageBytes)}";
+    
+    Layout = "_Layout";
+}
+
+<h2>Пользователь @Model.Attributes.FirstOrDefault(x => x.Key == "cn").Value</h2>
+
+<hr/>
+
+<div>
+    <table id="main-attributes-container">
+        <tr>
+            <td>
+                Уникальное имя записи
+            </td>
+            <td>
+                @Model.DistinguishedName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Отображаемое имя
+            </td>
+            <td>
+                @Model.Attributes.FirstOrDefault(item => item.Key == "displayName").Value
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Имя
+            </td>
+            <td>
+                @Model.Attributes.FirstOrDefault(item => item)
+            </td>
+        </tr>
+    </table>
+    <div id="image-container">
+        <img src="@imageBase64" alt="photo"/>
+    </div>
+</div>
+<hr/>
+<h4>Прочие атрибуты</h4>
+<div>
+    <table id="other-attributes-container">
+        
+    </table>
+</div>

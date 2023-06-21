@@ -141,18 +141,49 @@ namespace ADSeek.Infrastructure.Services
             {
                 return new ActiveDirectoryResult(exception);
             }
-            
-            
         }
 
-        public ActiveDirectoryResult Move(LdapRequests.MoveRequest request)
+        public async Task<ActiveDirectoryResult> Move(LdapRequests.MoveRequest request)
         {
-            throw new System.NotImplementedException();
+            using var connection = await ConnectAsync();
+
+            var dn = request.TargetDistinguishedName;
+            var rdn = request.RelativeDistinguishedName;
+            var parent = request.ParentTargetDistinguishedName;
+            var delete = request.DeleteOld;
+
+            try
+            {
+                await connection.RenameAsync
+                (
+                    dn,
+                    rdn,
+                    parent,
+                    delete
+                );
+
+                return new ActiveDirectoryResult();
+            }
+            catch (Exception exception)
+            {
+                return new ActiveDirectoryResult(exception);
+            }
         }
 
-        public ActiveDirectoryResult Remove(LdapRequests.RemoveRequest request)
+        public async Task<ActiveDirectoryResult> Remove(LdapRequests.RemoveRequest request)
         {
-            throw new System.NotImplementedException();
+            using var connection = await ConnectAsync();
+
+            try
+            {
+                await connection.DeleteAsync(request.DistinguishedName);
+
+                return new ActiveDirectoryResult();
+            }
+            catch (Exception exception)
+            {
+                return new ActiveDirectoryResult(exception);
+            }
         }
 
         public async Task<List<ActiveDirectoryObject>> SearchAsync(LdapRequests.SearchRequest request)

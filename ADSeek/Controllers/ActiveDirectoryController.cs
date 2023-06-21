@@ -9,6 +9,7 @@ using ADSeek.Domain.Models;
 using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
 using ADSeek.Models;
+using ADSeek.ModelViews;
 using Microsoft.AspNetCore.Mvc;
 using Novell.Directory.Ldap;
 using ActiveDirectoryObject = ADSeek.Domain.Models.ActiveDirectoryObject;
@@ -39,7 +40,7 @@ namespace ADSeek.Controllers
                 Username = dn
             };
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Authorize(ActiveDirectoryAuthorizationModel data)
         {
@@ -58,7 +59,7 @@ namespace ADSeek.Controllers
             {
                 ViewBag.ExceptionByAuthorization = result.ErrorMessage;
 
-                return View("/Views/Home/Index.cshtml");
+                return View("/Views/Shared/ModalView.cshtml", new ModalModelView("Произошла ошибка", result.ErrorMessage, "#FF0000"));
             }
 
             ViewBag.IsAuthorized = true;
@@ -211,7 +212,6 @@ namespace ADSeek.Controllers
             {
                 return View("/Views/Home/Error_View.cshtml");
             }
-
         }
     }
 }

@@ -56,10 +56,10 @@ namespace ADSeek.Application.Requests
                 ParentTargetDistinguishedName = parentTargetDistinguishedName;
                 DeleteOld = deleteOld;
             }
-
+            public string TargetDistinguishedName { get; set; }
             public string RelativeDistinguishedName { get; set; }
             public string ParentTargetDistinguishedName { get; set; }
-            public bool DeleteOld { get; set; }
+            public bool DeleteOld { get; set; } = true;
         }
         
         public class SearchRequest : LdapBaseRequests.IDistinguishedNameRequest
