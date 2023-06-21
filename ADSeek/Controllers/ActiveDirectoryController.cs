@@ -74,12 +74,7 @@ namespace ADSeek.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ActiveDirectoryUser ad_object = await _service.GetMeAsync();
-            
-            ViewBag.IsAuthorized = true;
-            ViewBag.Account = _me.DistinguishedName;
-            
-            return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", ad_object);
+            return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", Session.CURRENT_USER);
         }
 
         [HttpGet]
