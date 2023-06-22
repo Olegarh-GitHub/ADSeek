@@ -8,7 +8,6 @@ namespace ADSeek.Models
         public static ActiveDirectoryUser CURRENT_USER { get; set; }
 
         public static bool IS_AUTHORIZED => CURRENT_USER is not null;
-        public static bool IS_DOMAIN_ADMINISTRATOR = CURRENT_USER?.MemberOf
-            .Contains("CN=Administrators,CN=Builtin") ?? false;
+        public static bool IS_DOMAIN_ADMINISTRATOR => CURRENT_USER?.MemberOf.Any(item => item.Contains("CN=Administrators,CN=Builtin")) ?? false;
     }
 }
