@@ -64,7 +64,7 @@ namespace ADSeek.Controllers
             {
                 ViewBag.ExceptionByAuthorization = result.ErrorMessage;
 
-                return NotFound();
+                return View("/Views/Home/Index.cshtml");
             }
 
             Session.CURRENT_USER = await _service.GetMeAsync();

@@ -18,6 +18,13 @@ namespace ADSeek.Controllers
         {
             return View();
         }
+
+        public IActionResult Exit()
+        {
+            Session.CURRENT_USER = null;
+            
+            return View("Index");
+        }
         
         public IActionResult Privacy()
         {
