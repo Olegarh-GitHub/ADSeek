@@ -1,0 +1,63 @@
+﻿@using ADSeek.Domain.Enums
+@model ADSeek.Domain.Models.ActiveDirectoryUser
+
+@{
+    ViewBag.Title = $"Пользователь {Model.DisplayName}";
+
+    var imageBytes = Model.Photo;
+    var imageBase64 = $"data:image/gif;base64,{Convert.ToBase64String(imageBytes)}";
+    
+    Layout = "_Layout";
+}
+
+<h2>Пользователь @Model.SamAccountName</h2>
+
+<hr/>
+
+<div>
+    <table id="main-attributes-container">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DistinguishedName)
+            </td>
+            <td>
+                @Model.DistinguishedName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Surname)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Surname)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.GivenName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.GivenName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.UserAccountControl)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.UserAccountControl, 
+                    Html.GetEnumSelectList<UserAccountControl>(),new { @class = "form-control" })
+            </td>
+        </tr>
+    </table>
+    <div id="image-container">
+        <img src="@imageBase64" alt="photo"/>
+    </div>
+</div>
+<hr/>
+<h4>Прочие атрибуты</h4>
+<div>
+    <table id="other-attributes-container">
+        
+    </table>
+</div>

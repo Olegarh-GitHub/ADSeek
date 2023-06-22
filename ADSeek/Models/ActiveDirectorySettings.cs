@@ -14,12 +14,5 @@ namespace ADSeek.Models
             public string Username { get; set; }
             public string Password { get; set; }
         }
-        
-        public ActiveDirectoryConnectionSettings ConnectionSettings { get; set; }
-
-        public ActiveDirectorySettings(IConfiguration configuration)
-        {
-            configuration.Bind("ActiveDirectorySettings", this);
-        }
     }
 }

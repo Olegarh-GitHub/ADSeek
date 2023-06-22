@@ -16,6 +16,7 @@ namespace ADSeek.Application.Requests.Base
         
         public interface IMoveRequest
         {
+            public string TargetDistinguishedName { get; set; }
             public string RelativeDistinguishedName { get; set; }
             public string ParentTargetDistinguishedName { get; set; }
             public bool DeleteOld { get; set; }

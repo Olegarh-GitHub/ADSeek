@@ -5,15 +5,10 @@ namespace ADSeek.Models
 {
     public static class Session
     {
-        public static ActiveDirectoryObject CURRENT_USER { get; set; }
+        public static ActiveDirectoryUser CURRENT_USER { get; set; }
 
-        public static bool IS_DOMAIN_ADMINISTRATOR = CURRENT_USER?.Attributes
-            .Where(attribute => attribute.Key == "memberOf")
-            .SelectMany
-            (
-                attribute => attribute.Value?.StringValueArray
-            )
-            .ToList()
+        public static bool IS_AUTHORIZED => CURRENT_USER is not null;
+        public static bool IS_DOMAIN_ADMINISTRATOR = CURRENT_USER?.MemberOf
             .Contains("CN=Administrators,CN=Builtin") ?? false;
     }
 }
