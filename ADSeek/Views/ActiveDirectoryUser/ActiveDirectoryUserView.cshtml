@@ -67,11 +67,11 @@
     </table>
     @if (imageBytes.Any())
     {
-        <div id="image-container">
-            Фото профиля
-            <img src="@imageBase64" alt="photo" width="384" height="128"/>
-            @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel() {DistinguishedName = Model.DistinguishedName})
+        <div id="image-container" style="margin: 10px">
+            <span style="margin: 5px">Фото профиля</span>
+            <img src="@imageBase64" alt="photo" width="256" height="128"/>
         </div>
+        @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel() {DistinguishedName = Model.DistinguishedName})
     }
     else
     {
