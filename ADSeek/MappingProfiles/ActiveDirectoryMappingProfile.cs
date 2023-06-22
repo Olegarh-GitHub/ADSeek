@@ -130,6 +130,28 @@ namespace ADSeek.MappingProfiles
                                 : null
                         )
                 )
+                .ForMember
+                (
+                    dest => dest.GivenName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("givenName")
+                                ? src.Attributes.GetAttribute("givenName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.DisplayName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("displayName")
+                                ? src.Attributes.GetAttribute("displayName").StringValue
+                                : null
+                        )
+                )
                 ;
         }
     }

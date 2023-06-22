@@ -1,5 +1,4 @@
 ﻿@using ADSeek.Domain.Enums
-@using MvcEnumFlags
 @model ADSeek.Domain.Models.ActiveDirectoryUser
 
 @{
@@ -22,7 +21,7 @@
                 @Html.LabelFor(model => model.DistinguishedName)
             </td>
             <td>
-                @Html.EditorFor(model => model.DistinguishedName, new { htmlAttributes= new {@class="form-control", disabled=true}})
+                @Html.EditorFor(model => model.DistinguishedName, new { htmlAttributes= new {@class="form-control", disabled="disabled"}})
             </td>
         </tr>
         <tr>
@@ -65,23 +64,37 @@
                 @Html.EditorFor(model => model.Mail, new { htmlAttributes= new {@class="form-control"}})
             </td>
         </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Photo)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Photo, new { htmlAttributes= new {@class="form-control"}})
-            </td>
-        </tr>
     </table>
-    <div id="image-container">
-        <img src="@imageBase64" alt="photo"/>
-    </div>
+    @if (imageBytes.Any())
+    {
+        <div id="image-container">
+            <img src="@imageBase64" alt="photo"/>
+        </div>
+    }
+    else
+    {
+        <button>Установить фото</button>
+    }
 </div>
 <hr/>
-<h4>Прочие атрибуты</h4>
+<h5>Прочие атрибуты</h5>
 <div>
     <table id="other-attributes-container">
-        
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.ObjectGuid)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.ObjectGuid, new { htmlAttributes= new {@class="form-control", disabled ="disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.MemberOf)
+            </td>
+            <td>
+                @(string.Join(";\n\n", Model.MemberOf))
+            </td>
+        </tr>
     </table>
 </div>

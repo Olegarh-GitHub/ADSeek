@@ -21,6 +21,6 @@ namespace ADSeek.Domain.Models
         public LdapAttributeSet Attributes { get; set; }
 
         public ObjectClass ObjectClass => Attributes
-            .FirstOrDefault(item => item.Key == "userAccountControl").Value.ToObjectClass() ?? ObjectClass.Top;
+            .FirstOrDefault(item => item.Key == "objectClass").Value.ToObjectClass() ?? ObjectClass.Top;
     }
 }

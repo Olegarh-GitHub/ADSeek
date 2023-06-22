@@ -82,7 +82,7 @@ namespace ADSeek.Controllers
         {
             var neededObject = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
 
-            var user = _mapper.Map<ActiveDirectoryUser>(neededObject);
+            var user = _mapper.Map<ActiveDirectoryUser>(neededObject.FirstOrDefault());
 
             return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", user);
         }

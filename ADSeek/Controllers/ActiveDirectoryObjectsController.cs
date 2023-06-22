@@ -15,8 +15,6 @@ namespace ADSeek.Controllers
 
         public ActiveDirectoryObjectsController()
         {
-            ViewBag.IsAuthorized = true;
-            ViewBag.Account = ActiveDirectoryController._me.DistinguishedName;
             _service = ActiveDirectoryController._service;
         }
 
@@ -37,7 +35,7 @@ namespace ADSeek.Controllers
         {
             try
             {
-                var targetOu = $"CN=Users{(string.Join(",DC=", _service.Settings.Host.Split(".")))}";
+                var targetOu = $"CN=Users,DC={(string.Join(",DC=", _service.Settings.Host.Split(".")))}";
                 
                 var objects = await _service.SearchAsync(new LdapRequests.SearchRequest(targetOu));
 

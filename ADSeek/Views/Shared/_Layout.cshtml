@@ -1,6 +1,6 @@
 ﻿@{
-    bool isAuthorized = ViewBag.IsAuthorized ?? false;
-    string account = ViewBag.Account;
+    bool isAuthorized = Session.IS_AUTHORIZED;
+    string account = Session.CURRENT_USER?.DisplayName;
 }
 
 <!DOCTYPE html>
@@ -30,9 +30,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ActiveDirectoryObjects" asp-action="Index">Объекты домена</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ActiveDirectory" asp-action="Add_Object">Добавить учетную запись</a>
-                        </li>
+                        if (Session.IS_DOMAIN_ADMINISTRATOR)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ActiveDirectory" asp-action="Add_Object">Добавить учетную запись</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ActiveDirectory" asp-action="Search">Поиск</a>
                         </li>
