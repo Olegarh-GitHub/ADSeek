@@ -42,6 +42,16 @@
                 </tr>
                 <tr>
                     <td>
+                        @Html.LabelFor(model => model.Initials)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Initials, new {htmlAttributes = new {@class = "form-control"}})
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         @Html.LabelFor(model => model.Password)
                     </td>
                 </tr>
@@ -81,7 +91,7 @@
                     </td>
                 </tr>
                 <tr>
-                    Фотография профиля
+                    <td>Фотография профиля</td>
                 </tr>
                 <tr>
                     <td>
@@ -90,7 +100,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input id="send_data" type="submit" value="Создать учетную запись" oninput="hide()" class="btn btn-dark"/>
+                        <input style="margin: 5px" id="send_data" type="submit" value="Создать учетную запись" oninput="hide()" class="btn btn-dark"/>
                     </td>
                 </tr>
                 @if (!string.IsNullOrEmpty(exception))
