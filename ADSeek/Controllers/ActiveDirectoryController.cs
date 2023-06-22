@@ -9,6 +9,7 @@ using ADSeek.Application.Requests;
 using ADSeek.Domain.Models;
 using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
+using ADSeek.Inputs;
 using ADSeek.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -66,8 +67,6 @@ namespace ADSeek.Controllers
                 return NotFound();
             }
 
-            ViewBag.IsAuthorized = true;
-            
             Session.CURRENT_USER = await _service.GetMeAsync();
             
             return RedirectToAction("Index");
@@ -146,16 +145,13 @@ namespace ADSeek.Controllers
         [HttpGet]
         public async Task<IActionResult> Add_Object()
         {
-            ViewBag.IsAuthorized = true;
-            ViewBag.Account = _me.DistinguishedName;
-            
             return View("Add_Object");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add_Object(ActiveDirectoryAddObjectModel model)
+        public async Task<IActionResult> Add_Object(CreateUserInput model)
         {
-            var cn = model.CommonName;
+            var cn = model.DisplayName;
             var dn = $"CN={cn},CN=Users,DC=OLEG,DC=local";
             dn = $"CN={cn},CN=Users,DC=dc,DC=sharipov-bulat,DC=ru";
 
@@ -165,18 +161,15 @@ namespace ADSeek.Controllers
                 new("displayName", model.DisplayName),
                 new("givenName", model.GivenName),
                 new("sn", model.Surname),
-                new("cn", model.CommonName),
-                new("sAMAccountName", model.SAMAccountName),
+                new("cn", cn),
+                new("sAMAccountName", model.AccountName),
                 new("mail", model.Mail)
             };
 
             var request = new LdapRequests.CreateRequest(dn, attributes);
 
             var result = await _service.InsertAsync(request);
-
-            ViewBag.IsAuthorized = true;
-            ViewBag.Account = _me.DistinguishedName;
-
+            
             var password = model.Password;
 
             var attributesToModify = new LdapAttributeSet()
@@ -189,6 +182,24 @@ namespace ADSeek.Controllers
             var modifyRequest = new LdapRequests.ModifyRequest(dn, attributesToModify);
 
             var result2 = await _service.ModifyAsync(modifyRequest);
+
+            if (model.Photo is not null)
+            {       
+                await using var memoryStream = new MemoryStream();
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                await model.Photo.CopyToAsync(memoryStream);
+
+                var photoAttributes = new LdapAttributeSet()
+                {
+
+                    new("photo", memoryStream.ToArray())
+                };
+
+                var photoRequest = new LdapRequests.ModifyRequest(dn, photoAttributes);
+
+                await _service.ModifyAsync(photoRequest);
+            }
             
             if (result.IsOk && result2.IsOk)
             {
@@ -205,9 +216,6 @@ namespace ADSeek.Controllers
         [HttpGet]
         public async Task<IActionResult> Search()
         {
-            ViewBag.IsAuthorized = true;
-            ViewBag.Account = _me.DistinguishedName;
-            
             return View("ActiveDirectorySearch");
         }
 

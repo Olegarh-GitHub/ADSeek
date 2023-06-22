@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Http;
 
 namespace ADSeek.Inputs
 {
@@ -15,15 +16,12 @@ namespace ADSeek.Inputs
         
         [DisplayName("Фамилия")]
         public string Surname { get; set; }
-        
-        [DisplayName("Включить в группы")]
-        public string[] MemberOf { get; set; }
-        
+
         [DisplayName("Адрес эл.почты")]
         public string Mail { get; set; }
         
         [DisplayName("Фотография")]
-        public byte[] Photo { get; set; }
+        public IFormFile Photo { get; set; }
         
         [DisplayName("Пароль")]
         public string Password { get; set; }
