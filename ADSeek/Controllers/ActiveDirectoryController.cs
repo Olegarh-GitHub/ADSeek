@@ -118,18 +118,18 @@ namespace ADSeek.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadUserPhoto(IFormFile formFile, string dn)
+        public async Task<IActionResult> UploadUserPhoto(ActiveDirectoryUserPhotoUploadModel input)
         {
             var attributesToModify = new LdapAttributeSet();
 
             await using var memoryStream = new MemoryStream();
             memoryStream.Seek(0, SeekOrigin.Begin);
 
-            await formFile.CopyToAsync(memoryStream);
+            await input.FormFile.CopyToAsync(memoryStream);
 
             attributesToModify.Add("photo", new("photo", memoryStream.ToArray()));
 
-            var modifyRequest = new LdapRequests.ModifyRequest(dn, attributesToModify);
+            var modifyRequest = new LdapRequests.ModifyRequest(input.DistinguishedName, attributesToModify);
 
             try
             {
@@ -140,7 +140,7 @@ namespace ADSeek.Controllers
                 return View("/Views/Home/Error_View.cshtml", exception);
             }
             
-            return RedirectToAction("UserView", new {dn = dn});
+            return RedirectToAction("UserView", new {dn = input.DistinguishedName});
         }
 
         [HttpGet]
