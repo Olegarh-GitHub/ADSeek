@@ -1,4 +1,5 @@
 ﻿@using ADSeek.Domain.Enums
+@using MvcEnumFlags
 @model ADSeek.Domain.Models.ActiveDirectoryUser
 
 @{
@@ -21,7 +22,7 @@
                 @Html.LabelFor(model => model.DistinguishedName)
             </td>
             <td>
-                @Model.DistinguishedName
+                @Html.EditorFor(model => model.DistinguishedName, new { htmlAttributes= new {@class="form-control", disabled=true}})
             </td>
         </tr>
         <tr>
@@ -29,7 +30,7 @@
                 @Html.LabelFor(model => model.Surname)
             </td>
             <td>
-                @Html.EditorFor(model => model.Surname)
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes= new {@class="form-control"}})
             </td>
         </tr>
         <tr>
@@ -37,16 +38,39 @@
                 @Html.LabelFor(model => model.GivenName)
             </td>
             <td>
-                @Html.EditorFor(model => model.GivenName)
+                @Html.EditorFor(model => model.GivenName, new { htmlAttributes= new {@class="form-control"}})
             </td>
         </tr>
         <tr>
             <td>
-                @Html.LabelFor(model => model.UserAccountControl)
+                @Html.LabelFor(model => model.Initials)
             </td>
             <td>
-                @Html.DropDownListFor(model => model.UserAccountControl, 
-                    Html.GetEnumSelectList<UserAccountControl>(),new { @class = "form-control" })
+                @Html.EditorFor(model => model.Initials, new { htmlAttributes= new {@class="form-control"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DisplayName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.DisplayName, new { htmlAttributes= new {@class="form-control"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Mail)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Mail, new { htmlAttributes= new {@class="form-control"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Photo)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Photo, new { htmlAttributes= new {@class="form-control"}})
             </td>
         </tr>
     </table>
