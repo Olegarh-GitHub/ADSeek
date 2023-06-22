@@ -16,8 +16,7 @@
 <div>
     <h1>Добавить учетную запись</h1>
 
-    @using (Html.BeginForm("Add_Object", "ActiveDirectory", FormMethod.Post))
-    {
+    <form enctype="multipart/form-data" method="post" asp-controller="ActiveDirectory" asp-action="Add_Object">
         <div>
             <table>
                 <tr>
@@ -115,7 +114,7 @@
                 }
             </table>
         </div>
-    }
+    </form>
 
 </div>
 </body>
