@@ -76,7 +76,7 @@
         using (Html.BeginForm("UploadUserPhoto", "ActiveDirectory", FormMethod.Post))
         {
             @Html.Hidden("dn", Model.DistinguishedName)
-            <input type="file" id="formFile" value="Обзор..."/>
+            <input type="file" id="formFile" value="Обзор..." formenctype="multipart/form-data"/>
                                             
             <input type="submit" value="Загрузить фото" class="btn-dark btn"/>
         }
