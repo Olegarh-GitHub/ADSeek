@@ -158,6 +158,7 @@ namespace ADSeek.Controllers
             var attributes = new LdapAttributeSet()
             {
                 new("objectClass", "user"),
+                new("initials", model.Initials),
                 new("displayName", model.DisplayName),
                 new("givenName", model.GivenName),
                 new("sn", model.Surname),

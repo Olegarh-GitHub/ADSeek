@@ -9,6 +9,121 @@ namespace ADSeek.MappingProfiles
     {
         public ActiveDirectoryMappingProfile()
         {
+            CreateMap<ActiveDirectoryObject, ActiveDirectoryComputer>()
+                .ForMember
+                (
+                    dest => dest.DistinguishedName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("distinguishedName")
+                                ? src.Attributes.GetAttribute("distinguishedName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.SAMAccountName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("sAMAccountName")
+                                ? src.Attributes.GetAttribute("sAMAccountName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.OperatingSystem,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("operatingSystem")
+                                ? src.Attributes.GetAttribute("distinguishedName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.OperatingSystemVersion,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("operatingSystemVersion")
+                                ? src.Attributes.GetAttribute("distinguishedName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.DNSHostName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("dNSHostName")
+                                ? src.Attributes.GetAttribute("dNSHostName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.ObjectGuid,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("objectGUID")
+                                ? new Guid(src.Attributes.GetAttribute("objectGUID").ByteValue)
+                                : Guid.Empty
+                        )
+                )
+                ;
+            
+            CreateMap<ActiveDirectoryObject, ActiveDirectoryGroup>()
+                .ForMember
+                (
+                    dest => dest.DistinguishedName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("distinguishedName")
+                                ? src.Attributes.GetAttribute("distinguishedName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.Members,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("member")
+                                ? src.Attributes.GetAttribute("member").StringValueArray
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.SAMAccountName,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("sAMAccountName")
+                                ? src.Attributes.GetAttribute("sAMAccountName").StringValue
+                                : null
+                        )
+                )
+                .ForMember
+                (
+                    dest => dest.ObjectGuid,
+                    opt => opt
+                        .MapFrom
+                        (
+                            src => src.Attributes.ContainsKey("objectGUID")
+                                ? new Guid(src.Attributes.GetAttribute("objectGUID").ByteValue)
+                                : Guid.Empty
+                        )
+                );
+            
             CreateMap<ActiveDirectoryObject, ActiveDirectoryUser>()
                 .ForMember
                 (
