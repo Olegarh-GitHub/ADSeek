@@ -1,0 +1,44 @@
+﻿@model ADSeek.Domain.Models.ActiveDirectoryGroup
+
+@{
+    ViewBag.Title = $"Группа {Model.SAMAccountName}";
+    Layout = "_Layout";
+}
+
+<h2>Учетная запись группы @Model.SAMAccountName</h2>
+
+<hr/>
+
+<div>
+    <table id="main-attributes-container">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.SAMAccountName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.SAMAccountName, new { htmlAttributes= new {@class="form-control", disabled="disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Members)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.Members, Model.Members.Select((item, i) => new SelectListItem(item, i.ToString())))
+            </td>
+        </tr>
+    </table>
+</div>
+<h5>Прочие атрибуты</h5>
+<div>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(item => item.ObjectGuid)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.ObjectGuid, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+    </table>
+</div>

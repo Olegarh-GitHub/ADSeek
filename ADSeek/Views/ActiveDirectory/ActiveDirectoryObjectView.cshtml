@@ -1,0 +1,34 @@
+﻿@model ADSeek.Domain.Models.ActiveDirectoryObject
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Объект @Model.Attributes.FirstOrDefault(x => x.Key == "cn").Value</title>
+</head>
+<body>
+<div>
+    <table>
+        @foreach (var attribute in Model.Attributes)
+        {
+            <div>
+                <div style="margin-bottom: 10px">
+                    <span style="font-style: oblique">
+                        @Html.DisplayFor(_ => attribute.Name)
+                    </span>
+                </div>
+                <div style="margin-bottom: 10px">
+                    @Html.EditorFor(_ => attribute.StringValue, new {htmlAttributes = new {style = "width:150px", @class = "form-control", disabled="disabled"}})
+                </div>
+        
+                <hr/>
+            </div>
+        }
+    </table>
+</div>
+</body>
+</html>

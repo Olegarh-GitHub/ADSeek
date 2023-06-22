@@ -25,7 +25,30 @@
                     </span>
                 </div>
             }
-
+            else if (objectClass.HasFlag(ObjectClass.Computer))
+            {
+                <div>
+                    <span style="font-weight: bold">
+                        @Html.ActionLink(dn, "ComputerView", "ActiveDirectory", routeValues: new {dn = dn})
+                    </span>
+                </div>
+            }
+            else if (objectClass.HasFlag(ObjectClass.Group))
+            {
+                <div>
+                    <span style="font-weight: bold">
+                        @Html.ActionLink(dn, "GroupView", "ActiveDirectory", routeValues: new {dn = dn})
+                    </span>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <span style="font-weight: bold">
+                        @Html.ActionLink(dn, "ObjectView", "ActiveDirectory", routeValues: new {dn = dn})
+                    </span>
+                </div>
+            }
             <hr/>
         </div>
     }

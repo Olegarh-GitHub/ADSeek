@@ -73,7 +73,13 @@
     }
     else
     {
-        <button>Установить фото</button>
+        using (Html.BeginForm("UploadUserPhoto", "ActiveDirectory", FormMethod.Post))
+        {
+            @Html.Hidden("dn", Model.DistinguishedName)
+            <input type="file" id="formFile" value="Обзор..."/>
+                                            
+            <input type="submit" value="Загрузить фото" class="btn-dark btn"/>
+        }
     }
 </div>
 <hr/>

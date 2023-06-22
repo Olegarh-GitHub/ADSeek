@@ -1,9 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace ADSeek.Domain.Models
 {
     public class ActiveDirectoryComputer
     {
+        [DisplayName("Уникальное имя записи")]
+        public string DistinguishedName { get; set; }
+        
         [DisplayName("Операционная система")]
         public string OperatingSystem { get; set; }
         
@@ -15,5 +19,8 @@ namespace ADSeek.Domain.Models
         
         [DisplayName("Имя компьютера")]
         public string SAMAccountName { get; set; }
+        
+        [DisplayName("Уникальный идентификатор записи")]
+        public Guid ObjectGuid { get; set; }
     }
 }

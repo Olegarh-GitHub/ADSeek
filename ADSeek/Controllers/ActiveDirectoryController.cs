@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using ADSeek.Infrastructure.Mappers;
 using ADSeek.Infrastructure.Services;
 using ADSeek.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Novell.Directory.Ldap;
 using ActiveDirectoryObject = ADSeek.Domain.Models.ActiveDirectoryObject;
@@ -86,33 +88,59 @@ namespace ADSeek.Controllers
 
             return View("/Views/ActiveDirectoryUser/ActiveDirectoryUserView.cshtml", user);
         }
-
+        
         [HttpGet]
-        public async Task<IActionResult> Domain_Object(string dn)
+        public async Task<IActionResult> GroupView(string dn)
         {
-            return Ok();
-            // List<ActiveDirectoryObject> ad_objects = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
-            //
-            // try
-            // {
-            //     ActiveDirectoryObject ad_object = ad_objects.FirstOrDefault();
-            //
-            //     if (ad_object is null)
-            //     {
-            //         throw new Exception($"Объект с distinguishedName={dn} не найден");
-            //     }
-            //
-            //     ActiveDirectoryObjectModel model = _convert(ad_object);
-            //     
-            //     ViewBag.IsAuthorized = true;
-            //     ViewBag.Account = _me.DistinguishedName;
-            //
-            //     return View("ActiveDirectoryObject", model);
-            // }
-            // catch (Exception e)
-            // {
-            //     return View("/Views/Home/Error_View.cshtml", e);
-            // }
+            var neededObject = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+
+            var group = _mapper.Map<ActiveDirectoryGroup>(neededObject.FirstOrDefault());
+
+            return View("/Views/ActiveDirectoryGroup/ActiveDirectoryGroupView.cshtml", group);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> ComputerView(string dn)
+        {
+            var neededObject = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+
+            var computer = _mapper.Map<ActiveDirectoryComputer>(neededObject.FirstOrDefault());
+
+            return View("/Views/ActiveDirectoryComputer/ActiveDirectoryComputerView.cshtml", computer);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> ObjectView(string dn)
+        {
+            var neededObject = await _service.SearchAsync(new LdapRequests.SearchRequest(dn));
+            
+            return View("/Views/ActiveDirectory/ActiveDirectoryObjectView.cshtml", neededObject.FirstOrDefault());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadUserPhoto(IFormFile formFile, string dn)
+        {
+            var attributesToModify = new LdapAttributeSet();
+
+            await using var memoryStream = new MemoryStream();
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            await formFile.CopyToAsync(memoryStream);
+
+            attributesToModify.Add("photo", new("photo", memoryStream.ToArray()));
+
+            var modifyRequest = new LdapRequests.ModifyRequest(dn, attributesToModify);
+
+            try
+            {
+                await _service.ModifyAsync(modifyRequest);
+            }
+            catch (Exception exception)
+            {
+                return View("/Views/Home/Error_View.cshtml", exception);
+            }
+            
+            return RedirectToAction("UserView", new {dn = dn});
         }
 
         [HttpGet]
@@ -164,7 +192,7 @@ namespace ADSeek.Controllers
             
             if (result.IsOk && result2.IsOk)
             {
-                return RedirectToAction("Domain_Object", new {dn = dn});
+                return RedirectToAction("UserView", new {dn = dn});
             }
             else
             {

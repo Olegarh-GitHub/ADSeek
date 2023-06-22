@@ -1,0 +1,68 @@
+﻿@model ADSeek.Domain.Models.ActiveDirectoryComputer
+
+@{
+    ViewBag.Title = $"Компьютер {Model.SAMAccountName}";
+    Layout = "_Layout";
+}
+
+<h2>Учетная запись компьютера @Model.SAMAccountName</h2>
+
+<hr/>
+
+<div>
+    <table id="main-attributes-container">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DistinguishedName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.DistinguishedName, new { htmlAttributes= new {@class="form-control", disabled="disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DNSHostName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.DNSHostName, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.OperatingSystem)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.OperatingSystem, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.OperatingSystemVersion)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.OperatingSystemVersion, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.SAMAccountName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.SAMAccountName, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+    </table>
+</div>
+<h5>Прочие атрибуты</h5>
+<div>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(item => item.ObjectGuid)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.ObjectGuid, new { htmlAttributes= new {@class="form-control", disabled = "disabled"}})
+            </td>
+        </tr>
+    </table>
+</div>
