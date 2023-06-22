@@ -14,7 +14,7 @@
 
 <hr/>
 
-<div>
+<div style="display: flex; justify-content: space-between">
     <table id="main-attributes-container">
         <tr>
             <td>
@@ -70,12 +70,16 @@
         <div id="image-container" style="margin: 10px">
             <span style="margin: 5px">Фото профиля</span>
             <img src="@imageBase64" alt="photo" width="256" height="128"/>
+            <div style="margin: 5px">
+                @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel() {DistinguishedName = Model.DistinguishedName})
+            </div>
         </div>
-        @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel() {DistinguishedName = Model.DistinguishedName})
     }
     else
     {
-        @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel(){DistinguishedName = Model.DistinguishedName})
+        <div style="margin: 5px">
+             @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel(){DistinguishedName = Model.DistinguishedName})
+        </div>
     }
 </div>
 <hr/>
