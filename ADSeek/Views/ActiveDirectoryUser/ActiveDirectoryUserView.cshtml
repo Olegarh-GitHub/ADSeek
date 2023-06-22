@@ -73,7 +73,7 @@
     }
     else
     {
-        @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload")
+        @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel(){DistinguishedName = Model.DistinguishedName})
     }
 </div>
 <hr/>

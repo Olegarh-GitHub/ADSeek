@@ -1,9 +1,8 @@
 ﻿@model ActiveDirectoryUserPhotoUploadModel
 
-@using (Html.BeginForm("UploadUserPhoto", "ActiveDirectory", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.DistinguishedName)
-    <input asp-for="FormFile" type="file">
-                                                
-    <input type="submit" value="Загрузить фото" class="btn-dark btn"/>
-}
+ 
+    <form enctype="multipart/form-data" method="post" asp-controller="ActiveDirectory" asp-action="UploadUserPhoto">
+    @Html.HiddenFor(model => model.DistinguishedName)   
+        <input asp-for="FormFile" type="file">
+        <input asp-page-handler="UploadUserPhoto" class="btn" type="submit" value="Загрузить фото">
+    </form>                                          
