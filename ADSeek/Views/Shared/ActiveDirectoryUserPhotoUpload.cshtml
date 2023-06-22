@@ -4,5 +4,5 @@
     <form enctype="multipart/form-data" method="post" asp-controller="ActiveDirectory" asp-action="UploadUserPhoto">
     @Html.HiddenFor(model => model.DistinguishedName)   
         <input asp-for="FormFile" type="file">
-        <input asp-page-handler="UploadUserPhoto" class="btn" type="submit" value="Загрузить фото">
+        <input class="btn btn-dark" type="submit" value="Загрузить фото">
     </form>                                          
