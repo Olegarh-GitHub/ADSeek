@@ -155,17 +155,28 @@ namespace ADSeek.Controllers
             var dn = $"CN={cn},CN=Users,DC=OLEG,DC=local";
             dn = $"CN={cn},CN=Users,DC=dc,DC=sharipov-bulat,DC=ru";
 
-            var attributes = new LdapAttributeSet()
+            var attributes = new LdapAttributeSet();
+
+            try
             {
-                new("objectClass", "user"),
-                new("initials", model.Initials),
-                new("displayName", model.DisplayName),
-                new("givenName", model.GivenName),
-                new("sn", model.Surname),
-                new("cn", cn),
-                new("sAMAccountName", model.AccountName),
-                new("mail", model.Mail)
-            };
+                attributes = new LdapAttributeSet()
+                {
+                    new("objectClass", "user"),
+                    new("initials", model.Initials),
+                    new("displayName", model.DisplayName),
+                    new("givenName", model.GivenName),
+                    new("sn", model.Surname),
+                    new("cn", cn),
+                    new("sAMAccountName", model.AccountName),
+                    new("mail", model.Mail)
+                };
+            }
+            catch
+            {
+                ViewBag.ExceptionByCreation = "Для успешного создания объекта необходимо заполнить все поля";
+
+                return View("Add_Object");
+            }
 
             var request = new LdapRequests.CreateRequest(dn, attributes);
 
