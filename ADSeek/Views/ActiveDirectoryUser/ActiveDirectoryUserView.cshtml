@@ -68,7 +68,9 @@
     @if (imageBytes.Any())
     {
         <div id="image-container">
-            <img src="@imageBase64" alt="photo"/>
+            Фото профиля
+            <img src="@imageBase64" alt="photo" width="384" height="128"/>
+            @await Html.PartialAsync("ActiveDirectoryUserPhotoUpload", new ActiveDirectoryUserPhotoUploadModel() {DistinguishedName = Model.DistinguishedName})
         </div>
     }
     else
